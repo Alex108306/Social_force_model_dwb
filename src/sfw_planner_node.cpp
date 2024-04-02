@@ -90,6 +90,10 @@ void SFWPlannerNode::cleanup() {
   traj_pub_.reset();
 }
 
+void SFWPlannerNode::setSpeedLimit(const double & /* speed_limit */, const bool & /* percentage */) {
+    // Implementation here
+}
+
 void SFWPlannerNode::activate() {
   RCLCPP_INFO(logger_,
               "Activating controller: %s of type "
@@ -342,5 +346,6 @@ bool SFWPlannerNode::isGoalReached() {
 } // namespace social_force_window_planner
 
 // register this planner as a BaseLocalPlanner plugin
+#include "pluginlib/class_list_macros.hpp"
 PLUGINLIB_EXPORT_CLASS(social_force_window_planner::SFWPlannerNode,
                        nav2_core::Controller)

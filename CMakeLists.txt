@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.8)
 project(social_force_window_planner)
 
 if(NOT CMAKE_CXX_STANDARD)
@@ -8,9 +8,6 @@ endif()
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 endif()
-
-#set(CMAKE_INCLUDE_CURRENT_DIR ON)
-#set(CMAKE_AUTOMOC ON)
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -71,8 +68,6 @@ find_file(TF2_CPP_HEADERS
   PATH_SUFFIXES tf2_geometry_msgs
 )
 
-
-
 set(library_name ${PROJECT_NAME})
 
 add_library(${library_name} SHARED
@@ -95,22 +90,20 @@ if(EXISTS ${TF2_CPP_HEADERS})
   target_compile_definitions(${library_name} PUBLIC -DTF2_CPP_HEADERS)
 endif()
 
-
-
 install(TARGETS ${library_name}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
-)
+  RUNTIME DESTINATION lib
+  )
 
 install(DIRECTORY include/
-DESTINATION include)
+DESTINATION include/)
 
 
 ament_export_include_directories(include)
 ament_export_libraries(${library_name})
 ament_export_dependencies(${dependencies})
-ament_export_definitions("PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
+# ament_export_definitions("PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
 
 pluginlib_export_plugin_description_file(nav2_core sfw_plugin.xml)
 

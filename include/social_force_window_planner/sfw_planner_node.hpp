@@ -123,6 +123,7 @@ public:
     * @param percentage Bool if the speed limit is absolute or relative
     */
   void setSpeedLimit(const double & speed_limit, const bool & percentage) override;
+  // virtual void setSpeedLimit(const double & speed_limit, const bool & percentage);
 
 protected:
   /**
